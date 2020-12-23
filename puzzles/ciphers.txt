@@ -35,7 +35,7 @@
             ]
         },
         {
-            "name": "Main lab"
+            "name": "Main lab",
             "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768=",
             "images": [
                 "puzzle4.png"
