@@ -1,0 +1,43 @@
+
+<html>
+<head>
+</head>
+<body>
+<div>
+    <img src="puzzle1.png" width=400>
+</div>
+<form id="puzzle1">
+    <input type="text" name="answer" value="" id="q3">
+</form>
+<button onclick="myFunction(this)">try</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+<script>
+    function checkAnswer(answer) {
+        var bare_answer = answer.toLowerCase().replace(/\s/g, '');
+        var ciphertext = "U2FsdGVkX1/xhJjPHNWL/qa9QdJ5VEb4kvopYmZFqYg=";
+        var result = CryptoJS.AES.decrypt(ciphertext, bare_answer).toString(CryptoJS.enc.Utf8);
+        return result == "correct";
+    }
+
+    function myFunction(btn) {
+        var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123');
+        var form = document.getElementById('puzzle1'),
+            answer   = form['answer'],
+            p    = document.createElement('p'),
+            txt;
+        if (checkAnswer(answer.value)) {
+            txt = "Your answer is correct!"
+        } else {
+            txt = "Your answer is not correct";
+        }
+        var oldP = document.getElementById('response');
+        if (oldP) oldP.parentNode.removeChild(oldP);
+        p.appendChild(document.createTextNode(txt));
+        p.id = "response";
+        btn.parentNode.insertBefore(p, btn.nextSibling);
+    }
+</script>
+</body>
+</html>
+
