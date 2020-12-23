@@ -1,16 +1,45 @@
 {
     "puzzles": [
-        "Back to the roof",
-        "Office",
-        "Coffee table",
-        "Meeting room",
-        "Main lab"
-    ],
-    "ciphers": [
-        "U2FsdGVkX1+m2wov02iZBVuH7LWIhwM8yQj54rB7Dlg=",
-        "U2FsdGVkX1/xhJjPHNWL/qa9QdJ5VEb4kvopYmZFqYg=",
-        "U2FsdGVkX1/j9swn/Sl6hRcRxKV2gkFr6Q+2ZNdiT+4=",
-        "U2FsdGVkX19dt9yG//pmvhdIdJRNdHEu/fVyqtqjAqk=",
-        "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+        {
+            "name": "Back to the roof",
+            "cipher": "U2FsdGVkX1+m2wov02iZBVuH7LWIhwM8yQj54rB7Dlg=",
+            "images": [
+                "puzzle0.png"
+            ],
+            "dependencies": [
+                "Office",
+                "Coffee table",
+                "Meeting room",
+                "Main lab"
+            ]
+        },
+        {
+            "name": "Office",
+            "cipher": "U2FsdGVkX1/xhJjPHNWL/qa9QdJ5VEb4kvopYmZFqYg=",
+            "images": [
+                "puzzle1.png"
+            ]
+        },
+        {
+            "name": "Coffee table",
+            "cipher": "U2FsdGVkX1/j9swn/Sl6hRcRxKV2gkFr6Q+2ZNdiT+4=",
+            "images": [
+                "puzzle2.png"
+            ]
+        },
+        {
+            "name": "Meeting room",
+            "cipher": "U2FsdGVkX19dt9yG//pmvhdIdJRNdHEu/fVyqtqjAqk=",
+            "images": [
+                "puzzle3.png"
+            ]
+        },
+        {
+            "name": "Main lab"
+            "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768=",
+            "images": [
+                "puzzle4.png"
+            ]
+        }
     ]
 }
