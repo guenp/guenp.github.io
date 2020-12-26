@@ -34,7 +34,7 @@ function loadPuzzle() {
             showControls();
         }
     };
-    xmlhttp.open("GET", "puzzle.txt", true);
+    xmlhttp.open("GET", "puzzle.json", true);
     xmlhttp.send();
 }
 
