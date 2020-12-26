@@ -1,165 +1,20 @@
-
 <html>
 <head>
 <title>Quantum Christmas |Puzzle〉</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
-<script>
-
-function setHiddenVariable(name, value) {
-    const data = document.getElementById("hiddenVariables");
-    var hidden = document.createElement("input");
-    hidden.type = "hidden";
-    hidden.id = name;
-    hidden.name = name;
-    hidden.value = value;
-    data.appendChild(hidden);
-}
-
-function getHiddenVariable(name) {
-    const variable = document.getElementById(name);
-    if (variable) {
-        return variable.value;
-    } else {
-        return "";
-    }
-}
-
-function getPuzzleData() {
-    return JSON.parse(getHiddenVariable("puzzleData"));
-}
-
-function loadPuzzle() {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            setHiddenVariable("puzzleData", this.responseText);
-            showControls();
-        }
-    };
-    xmlhttp.open("GET", "puzzle.txt", true);
-    xmlhttp.send();
-}
-
-function showControls() {
-    const controls = document.getElementById("puzzleControls");
-    const puzzleData = getPuzzleData();
-    const numPuzzles = puzzleData.puzzles.length;
-
-    for (puzzleNumber = 0; puzzleNumber < numPuzzles; puzzleNumber++) {
-        var button = document.createElement("button");
-        button.id = `buttonShow${puzzleNumber}`;
-        button.innerHTML = puzzleData.puzzles[puzzleNumber].name;
-        button.setAttribute("onclick", `showPuzzle(${puzzleNumber})`);
-        controls.appendChild(button);
-    }
-
-    showPuzzle(0);
-}
-
-function showResponse(txt) {
-    var response = document.getElementById('puzzleResponse');
-    replaceChild(response, document.createTextNode(txt));
-}
-
-function replaceChild(parent, child) {
-    if (parent.childNodes.length > 0) { 
-        parent.replaceChild(child, parent.childNodes[0]);
-    } else { 
-        parent.appendChild(child);
-    }
-}
-
-function decrypt(ciphertext, answer) {
-    if (answer == "") {
-        return false;
-    }
-    var bare_answer = answer.toLowerCase().replace(/\s/g, '');
-    var result = CryptoJS.AES.decrypt(ciphertext, bare_answer).toString(CryptoJS.enc.Utf8);
-    return result == "correct";
-}
-
-function checkAnswer(answer, puzzleNumber) {
-    const puzzleData = getPuzzleData();
-    const cipher = puzzleData.puzzles[puzzleNumber].cipher;
-
-    if (decrypt(cipher, answer)) {
-        showResponse("Your answer is correct!");
-        setHiddenVariable(`answer${puzzleNumber}`, answer);
-    } else {
-        showResponse("Your answer is not correct");
-    }
-}
-
-function submitAnswer(puzzleNumber) {
-    var answer = document.getElementById('answer' + puzzleNumber);
-    checkAnswer(answer.value, puzzleNumber);
-}
-
-function readSearchParams(puzzleNumber) {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    var answer = urlParams.get('answer' + puzzleNumber);
-    var answerInput = document.getElementById('answer' + puzzleNumber);
-    answerInput.value = answer;
-    var btn = document.getElementById('button' + puzzleNumber);
-    if (answer != null) {
-        submitAnswer(puzzleNumber);
-    }
-}
-
-function showPuzzle(puzzleNumber) {
-    image = document.getElementById("puzzleImage");
-    var img = document.createElement("img");
-    img.src = `puzzle${puzzleNumber}.png`;
-    img.height = 600;
-    replaceChild(image, img)
-
-    form = document.getElementById("puzzleForm");
-    var input = document.createElement("input");
-    input.type = "text";
-    input.name = `answer${puzzleNumber}`;
-    input.id = `answer${puzzleNumber}`;
-    input.value = getHiddenVariable(`answer${puzzleNumber}`);
-    replaceChild(form, input);
-
-    buttonDiv = document.getElementById("puzzleButton");
-    var button = document.createElement("button");
-    button.id = `button${puzzleNumber}`;
-    button.innerHTML = "submit answer";
-    button.setAttribute("onclick", `submitAnswer(${puzzleNumber})`);
-    replaceChild(buttonDiv, button);
-
-    // enter submits the answer
-    var t = document.querySelector('[type=text]');
-    t.addEventListener('keydown', function(event) {
-        if (event.keyCode == 13) {
-            submitAnswer(puzzleNumber);
-        }
-    });
-
-    t.addEventListener('keypress', function(event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-        }
-    });
-
-    if (input.value) {
-        checkAnswer(input.value, puzzleNumber);
-    } else {
-        showResponse("");
-    }
-}
-
-</script>
+<script src="puzzle.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body onload=loadPuzzle()>
 
 <div id="puzzleControls"></div>
-<div id="hiddenVariables"></div>
 <div id="puzzleImage"></div>
+
 <form id="puzzleForm"></form>
-<div id="puzzleButton"></div>
+<div id="buttons"></div>
+<div id="submitButton" style="float: left;"></div>
+<div id="clearButton"></div>
 <div id="puzzleResponse"></div>
 
 </body>

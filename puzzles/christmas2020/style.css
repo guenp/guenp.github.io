@@ -1,0 +1,22 @@
+img {
+    margin: 0px;
+  }
+
+  .clip-polygon-1 {
+    display: inline-block;
+    clip-path: polygon(0% 0%, 50% 0%, 50% 50%, 0% 50%);
+  }
+
+  .clip-polygon-2 {
+    display: inline-block;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
+  }
+
+  .clip-polygon-3 {
+    display: inline-block;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%, 0% 50%);
+  }
+  
+  body, html {
+    height: 100%;
+  }
