@@ -1,27 +1,3 @@
-function setCookie(name, value) {
-    document.cookie=`${name}=${value}; path=/`;
-}
-
-function deleteCookie(name) {
-    setCookie(name, ";expires=Thu, 01 Jan 1970 00:00:00 UTC;");
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
 function getPuzzleData() {
     return JSON.parse(getCookie("puzzleData"));
 }
@@ -73,15 +49,6 @@ function removeChildren(parent) {
     }
 }
 
-function decrypt(ciphertext, answer) {
-    if (answer == "") {
-        return false;
-    }
-    var bare_answer = answer.toLowerCase().replace(/\s/g, '');
-    var result = CryptoJS.AES.decrypt(ciphertext, bare_answer).toString(CryptoJS.enc.Utf8);
-    return result == "correct";
-}
-
 function checkAnswers(answers, puzzleNumber) {
     const puzzleData = getPuzzleData();
     var results = [];
@@ -123,8 +90,7 @@ function clearAnswers(puzzleNumber) {
     showResponse("");
 }
 
-function getPolygon(num, total) {
-    const frac = num/total;
+function getPolygon(frac) {
     if (frac == 0.25) {
         return "0% 0%, 50% 0%, 50% 50%, 0% 50%";
     } else if (frac == 0.5) {
@@ -147,42 +113,27 @@ function getAnswerFromCookie(puzzleName, questionNumber) {
     }
 }
 
-function showPuzzle(puzzleNumber) {    
-    image = document.getElementById("puzzleImage");
-    var img = document.createElement("img");
-    img.src = `puzzle${puzzleNumber}.png`;
-    img.height = 700;
-    replaceChild(image, img);
-
+function numDepsAnsweredCorrectly(puzzleNumber) {
     const puzzleData = getPuzzleData();
-    const puzzleName = puzzleData.puzzles[puzzleNumber].name;
     const dependencies = puzzleData.puzzles[puzzleNumber].dependencies;
-    var showAnswerInput = false;
-
-    if (dependencies == null) {
-        showAnswerInput = true;
+    var numDeps = 0;
+    for (dep in dependencies) {
+        if (getCookie(dependencies[dep])) {
+            numDeps++;
+        };
     }
+    return numDeps;
+}
 
-    if (dependencies != null) {
-        var numDeps = 0;
+function getMetaProgress(puzzleNumber) {
+    const puzzleData = getPuzzleData();
+    const dependencies = puzzleData.puzzles[puzzleNumber].dependencies;
+    const numDeps = numDepsAnsweredCorrectly(puzzleNumber);
+    return numDeps/dependencies.length;
+}
 
-        for (dep in dependencies) {
-            if (getCookie(dependencies[dep])) {
-                numDeps++;
-            };
-        }
-
-        if (dependencies.length == numDeps) {
-            showAnswerInput = true;
-        } else {
-            const polygon = getPolygon(numDeps, dependencies.length);
-            img.setAttribute("style", `display: inline-block; clip-path: polygon(${polygon});`);
-            image.setAttribute("style", "display: inline-block; background-image: url(https://cdn.pixabay.com/photo/2017/07/31/19/51/hall-roof-2560454__340.jpg);");
-        }
-    } else {
-        image.setAttribute("style", "display: inline-block;");
-    }
-
+function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
+    const puzzle = puzzleData.puzzles[puzzleNumber];
     const form = document.getElementById("puzzleForm");
     const submitButtonDiv = document.getElementById("submitButton");
     const clearButtonDiv = document.getElementById("clearButton");
@@ -200,11 +151,28 @@ function showPuzzle(puzzleNumber) {
             form.appendChild(input_text);
 
             var input = document.createElement("input");
-            input.type = "text";
             input.name = `answer${puzzleNumber}_question${questionNumber}`;
             input.id = `answer${puzzleNumber}_question${questionNumber}`;
-            input.value = getAnswerFromCookie(puzzleName, questionNumber);
-            form.appendChild(input);
+            input.value = getAnswerFromCookie(puzzle.name, questionNumber);
+
+            if (question.options != null) {
+                dl = document.createElement('datalist');
+                dl.id = `answer${puzzleNumber}_question${questionNumber}_datalist`
+                input.setAttribute("list", dl.id);
+
+                for (var i=0; i < question.options.length; i += 1) {
+                    var option = document.createElement('option');
+                    option.value = question.options[i];
+                    dl.appendChild(option);
+                }
+
+                form.appendChild(input);
+                form.appendChild(dl);
+
+            } else {
+                input.type = "text";
+                form.appendChild(input);
+            }
         }
 
         var button = document.createElement("button");
@@ -220,7 +188,11 @@ function showPuzzle(puzzleNumber) {
         replaceChild(clearButtonDiv, button);
 
         // enter submits the answer
-        var t = document.querySelector('[type=text]');
+        if (question.options != null) {
+            var t = document.querySelector(`[list=${dl.id}]`);
+        } else {
+            var t = document.querySelector('[type=text]');
+        }
         t.addEventListener('keydown', function(event) {
             if (event.keyCode == 13) {
                 submitAnswers(puzzleNumber, questions.length);
@@ -240,11 +212,40 @@ function showPuzzle(puzzleNumber) {
         }
 
     } else {
-
         removeChildren(form);
         removeChildren(submitButtonDiv);
         removeChildren(clearButtonDiv);
         showResponse("");
-
     }
+}
+
+function showPuzzle(puzzleNumber) {
+    const puzzleData = getPuzzleData();
+    image = document.getElementById("puzzleImage");
+    var img = document.createElement("img");
+    img.src = puzzleData.puzzles[puzzleNumber].images[0];
+    img.height = 700;
+    replaceChild(image, img);
+
+    const dependencies = puzzleData.puzzles[puzzleNumber].dependencies;
+    var showAnswerInput;
+    if (dependencies == null) {
+        // Regular puzzle
+        showAnswerInput = true;
+        image.setAttribute("style", "display: inline-block;");
+    } else {
+        // Meta puzzle (with dependencies)
+        const metaProgress = getMetaProgress(puzzleNumber);
+        if (metaProgress == 1.0) {
+            showAnswerInput = true;
+        } else {
+            showAnswerInput = false;
+            const polygon = getPolygon(metaProgress);
+            img.setAttribute("style", `display: inline-block; clip-path: polygon(${polygon});`);
+            const meta = puzzleData.puzzles[puzzleNumber].images[1];
+            image.setAttribute("style", `display: inline-block; background-image: url(${meta});`);
+        }
+    }
+
+    showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput);
 }

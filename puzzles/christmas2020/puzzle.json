@@ -1,11 +1,14 @@
 {
     "intro": {
-        "description": "Santa was delivering presents on Christmas Eve but almost flew into a small plane and had to made a crash landing! It looks like he landed on the roof of some kind of laboratory building. Can you help him figure out how to get off of the roof and back to his sled?"
+        "description": "Santa was delivering presents on Christmas Eve but almost flew into a small plane and had to made a crash landing! It looks like he landed on the roof of some kind of laboratory building. Can you help him figure out how to get off of the roof and back to his sled?",
+        "images": [
+            "intro.png"
+        ]
     },
     "puzzles": [
         {
             "name": "The roof",
-            "description": "The air ducts on the roof seem to lead to different rooms: the office, the coffee table, the meeting room and the main lab. Perhaps visiting this rooms will help uncover clues on how to find the exit.",
+            "description": "The air ducts on the roof seem to lead to different rooms: the office, the coffee table, the meeting room and the main lab. Perhaps visiting these rooms will help uncover clues on how to find the exit?",
             "questions": [
                 {
                     "text": "What message did Santa find on the roof? ", 
@@ -13,7 +16,8 @@
                 }
             ],
             "images": [
-                "puzzle0.png"
+                "puzzle0.png",
+                "puzzle0_cover.jpg"
             ],
             "dependencies": [
                 "Office",
@@ -67,19 +71,39 @@
             "questions": [
                 {
                     "text": "A will receive: ", 
-                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                    "cipher": "U2FsdGVkX19i9HZ6yrBFjxY6oZbArxoMa7qaA28iGlo=",
+                    "options": [
+                        "chocolate", 
+                        "socks", 
+                        "coal"
+                    ]
                 },
                 {
                     "text": "B will receive: ", 
-                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                    "cipher": "U2FsdGVkX1+lwhYbzfYFRT7uu1q3NhNoPVH5Apyz1XM=",
+                    "options": [
+                        "chocolate", 
+                        "socks", 
+                        "coal"
+                    ]
                 },
                 {
                     "text": "C will receive: ", 
-                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                    "cipher": "U2FsdGVkX181Lyq6Adp98qkwiB9faWXeW9Ldm9gdH5E=",
+                    "options": [
+                        "chocolate", 
+                        "socks", 
+                        "coal"
+                    ]
                 },
                 {
                     "text": "D will receive: ", 
-                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                    "cipher": "U2FsdGVkX19i9HZ6yrBFjxY6oZbArxoMa7qaA28iGlo=",
+                    "options": [
+                        "chocolate", 
+                        "socks", 
+                        "coal"
+                    ]
                 }
             ],
             "images": [
