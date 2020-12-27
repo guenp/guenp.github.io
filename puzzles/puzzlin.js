@@ -1,3 +1,9 @@
+/*
+Puzzlin' v0.1
+github.com/guenp/guenp.github.io
+(c) 2020 by Guen Prawiroatmodjo. All rights reserved.
+https://raw.githubusercontent.com/guenp/guenp.github.io/main/LICENSE
+*/
 function setCookie(name, value) {
     document.cookie=`${name}=${value}; path=/`;
 }
