@@ -142,6 +142,7 @@ function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
     const form = document.getElementById("puzzleForm");
     const submitButtonDiv = document.getElementById("submitButton");
     const clearButtonDiv = document.getElementById("clearButton");
+    const hasAnswers = getCookie(puzzle.name) ? true : false;
 
     if (showAnswerInput) {
         const questions = puzzleData.puzzles[puzzleNumber].questions;
@@ -184,39 +185,39 @@ function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
             form.appendChild(br);
         }
 
-        var button = document.createElement("button");
-        button.id = `button${puzzleNumber}`;
-        button.innerHTML = "submit answer";
-        button.setAttribute("onclick", `submitAnswers(${puzzleNumber}, ${questions.length})`);
-        replaceChild(submitButtonDiv, button);
+        if (!hasAnswers) {
+            // submit button
+            var button = document.createElement("button");
+            button.id = `button${puzzleNumber}`;
+            button.innerHTML = "submit answer";
+            button.setAttribute("onclick", `submitAnswers(${puzzleNumber}, ${questions.length})`);
+            replaceChild(submitButtonDiv, button);
 
-        var button = document.createElement("button");
-        button.id = `button${puzzleNumber}`;
-        button.innerHTML = "clear answer";
-        button.setAttribute("onclick", `clearAnswers(${puzzleNumber})`);
-        replaceChild(clearButtonDiv, button);
-
-        // enter submits the answer
-        if (question.options != null) {
-            var t = document.querySelector(`[list=${dl.id}]`);
-        } else {
-            var t = document.querySelector('[type=text]');
-        }
-        t.addEventListener('keydown', function(event) {
-            if (event.keyCode == 13) {
-                submitAnswers(puzzleNumber, questions.length);
-            }   
-        });
-
-        t.addEventListener('keypress', function(event) {
-            if (event.keyCode == 13) {
-                event.preventDefault();
+            // enter submits the answer
+            if (question.options != null) {
+                var t = document.querySelector(`[list=${dl.id}]`);
+            } else {
+                var t = document.querySelector('[type=text]');
             }
-        });
+            t.addEventListener('keydown', function(event) {
+                if (event.keyCode == 13) {
+                    submitAnswers(puzzleNumber, questions.length);
+                }   
+            });
 
-        if (!input.value) {
+            t.addEventListener('keypress', function(event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                }
+            });
             showResponse("");
         } else {
+            // clear button
+            var button = document.createElement("button");
+            button.id = `button${puzzleNumber}`;
+            button.innerHTML = "clear answer";
+            button.setAttribute("onclick", `clearAnswers(${puzzleNumber})`);
+            replaceChild(clearButtonDiv, button);
             submitAnswers(puzzleNumber, questions.length);
         }
 
