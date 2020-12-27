@@ -13,7 +13,7 @@
             "description": "The air duct system seems to be the best replacement for the chimney, and they lead to different rooms as well: <a href='#' onclick='showPuzzle(2)'>the office</a>, <a href='#' onclick='showPuzzle(3)'>the coffee table</a>, <a href='#' onclick='showPuzzle(4)'>the meeting room</a> and <a href='#' onclick='showPuzzle(5)'>the main lab</a>. Perhaps visiting all these rooms will help uncover clues on how to find the exit?",
             "questions": [
                 {
-                    "text": "What message did Santa find on the roof on his way to the exit?<br>Answer: ", 
+                    "text": "What message did Santa find on his way to the roof?<br>Answer: ", 
                     "cipher": "U2FsdGVkX18hr2if6DZwo2ULr1ILeKu/xx2BIVH3YVA="
                 }
             ],
