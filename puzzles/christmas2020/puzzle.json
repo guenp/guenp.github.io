@@ -46,7 +46,7 @@
         },
         {
             "name": "Coffee table",
-            "description": "There is a peculiar looking photo album lying open on the coffee table. Some of the photos have unfinished descriptions on them. Can you figure out what letters are missing?",
+            "description": "There is a peculiar looking photo album lying open on the coffee table. Some of the photos have unfinished descriptions on them. Can you figure out what is on the hidden photo?",
             "questions": [
                 {
                     "text": "Answer: ", 
