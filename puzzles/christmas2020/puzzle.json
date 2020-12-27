@@ -3,20 +3,21 @@
     "puzzles": [
         {
             "name": "Start",
-            "description": "Santa was merrily delivering presents on Christmas Eve when he almost flew into a small plane! To avert disaster, Santa had to made a crash landing. It looks like he landed on the roof of some kind of laboratory building, but he's stuck and can't find the exit... Can you help Santa figure out how to get off of the roof and back to his sled?",
+            "description": "Santa was merrily delivering presents on Christmas Eve when he almost flew into a small plane! To avert disaster, Santa had to made a crash landing. It looks like he landed in some kind of laboratory building, but he's stuck and can't find the exit... Can you help Santa figure out how to get to the roof and back to his sled?",
             "images": [
                 "intro.png"
             ]
         },
         {
-            "name": "The roof",
-            "description": "The air ducts on the roof seem to lead to different rooms: <a href='#' onclick='showPuzzle(2)'>the office</a>, <a href='#' onclick='showPuzzle(3)'>the coffee table</a>, <a href='#' onclick='showPuzzle(4)'>the meeting room</a> and <a href='#' onclick='showPuzzle(5)'>the main lab</a>. Perhaps visiting these rooms will help uncover clues on how to find the exit?",
+            "name": "Back to the roof",
+            "description": "The air duct system seems to be the best replacement for the chimney, and they lead to different rooms as well: <a href='#' onclick='showPuzzle(2)'>the office</a>, <a href='#' onclick='showPuzzle(3)'>the coffee table</a>, <a href='#' onclick='showPuzzle(4)'>the meeting room</a> and <a href='#' onclick='showPuzzle(5)'>the main lab</a>. Perhaps visiting all these rooms will help uncover clues on how to find the exit?",
             "questions": [
                 {
                     "text": "What message did Santa find on the roof on his way to the exit?<br>Answer: ", 
                     "cipher": "U2FsdGVkX18hr2if6DZwo2ULr1ILeKu/xx2BIVH3YVA="
                 }
             ],
+            "incomplete": "Visit the 4 different rooms and solve the puzzles first, then come back to this page to solve the final puzzle.",
             "success": "Your answer is correct! Thank you for helping Santa find his way back to his <a href='https://www.youtube.com/watch?v=rCcYndfwFq4' target='_blank'>sled</a>.",
             "images": [
                 "puzzle0.png",
@@ -73,7 +74,7 @@
         },
         {
             "name": "Main lab",
-            "description": "You enter the main lab and next to some buzzing equipment, there is a file open on one of the computers. Is that a puzzle?",
+            "description": "Santa just realized that some of his clientele are in this building, so he can as well deliver some gifts while looking for an exit.",
             "questions": [
                 {
                     "text": "A will receive: ", 

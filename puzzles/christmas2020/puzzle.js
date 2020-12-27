@@ -225,7 +225,6 @@ function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
         replaceChild(clearButtonDiv, button);
 
         if (!hasAnswers) {
-            showResponse("");
         } else {
             submitAnswers(puzzleNumber, questions.length);
         }
@@ -234,7 +233,6 @@ function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
         removeChildren(form);
         removeChildren(submitButtonDiv);
         removeChildren(clearButtonDiv);
-        showResponse("");
     }
 }
 
@@ -260,28 +258,32 @@ function showPuzzle(puzzleNumber) {
     var showAnswerInput;
 
     if (puzzle.questions == null) {
+        // No questions to answer, just show the image
         showAnswerInput = false;
         img.setAttribute("style", "");
         image.setAttribute("style", "");
+        showResponse("");
     } else if (dependencies == null) {
         // Regular puzzle
         showAnswerInput = true;
         image.setAttribute("style", "");
-
+        showResponse("");
     } else {
         // Meta puzzle (with dependencies)
         const metaProgress = getMetaProgress(puzzleNumber);
 
         if (metaProgress == 1.0) {
             showAnswerInput = true;
+            showResponse(puzzle.complete ? puzzle.complete : "");
 
         } else {
             showAnswerInput = false;
             const polygon = getPolygon(metaProgress);
             img.setAttribute("style", `clip-path: polygon(${polygon});`);
             img.setAttribute("id", "puzzleImg");
-            const meta = puzzleData.puzzles[puzzleNumber].images[1];
+            const meta = puzzle.images[1];
             image.setAttribute("style", `background-image: url(${meta}); background-repeat: no-repeat; background-size: contain`);
+            showResponse(puzzle.incomplete);
         }
     }
 
