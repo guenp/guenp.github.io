@@ -256,7 +256,7 @@ function showPuzzle(puzzleNumber) {
     } else if (dependencies == null) {
         // Regular puzzle
         showAnswerInput = true;
-        image.setAttribute("style", "display: inline-block;");
+        image.setAttribute("style", "");
 
     } else {
         // Meta puzzle (with dependencies)
@@ -268,9 +268,10 @@ function showPuzzle(puzzleNumber) {
         } else {
             showAnswerInput = false;
             const polygon = getPolygon(metaProgress);
-            img.setAttribute("style", `display: inline-block; clip-path: polygon(${polygon});`);
+            img.setAttribute("style", `clip-path: polygon(${polygon});`);
+            img.setAttribute("id", "puzzleImg");
             const meta = puzzleData.puzzles[puzzleNumber].images[1];
-            image.setAttribute("style", `display: inline-block; background-image: url(${meta}); background-repeat: no-repeat;`);
+            image.setAttribute("style", `background-image: url(${meta}); background-repeat: no-repeat; background-size: contain`);
         }
     }
 

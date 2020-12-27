@@ -20,6 +20,7 @@ body, html {
 #puzzleLeft {
   width: 25%;
   float: left; /* add this */
+  min-width: 400px;
 }
 
 #puzzleText {
@@ -42,7 +43,15 @@ body, html {
 }
 
 #puzzleImage {
-    overflow: hidden; /* if you don't want #second to wrap below #first */
+    overflow: scroll; /* if you don't want #second to wrap below #first */
     margin: 20px;
     height: 80%;
+    min-height: 500px;
+    min-width: 480px;
+}
+
+#puzzleImg {
+  display: inline-block;
+  min-height: 500px;
+  min-width: 480px;
 }

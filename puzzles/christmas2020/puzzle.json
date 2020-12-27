@@ -20,7 +20,7 @@
             "success": "Your answer is correct! Thank you for helping Santa find his way back to his <a href='https://www.youtube.com/watch?v=rCcYndfwFq4' target='_blank'>sled</a>.",
             "images": [
                 "puzzle0.png",
-                "puzzle0_cover.jpg"
+                "puzzle0_cover.png"
             ],
             "dependencies": [
                 "Office",
