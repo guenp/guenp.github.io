@@ -31,8 +31,10 @@ function showControls() {
 }
 
 function showResponse(txt) {
-    var response = document.getElementById('puzzleResponse');
-    replaceChild(response, document.createTextNode(txt));
+    const response = document.getElementById('puzzleResponse');
+    const text = document.createElement("text");
+    text.innerHTML = txt;
+    replaceChild(response, text);
 }
 
 function replaceChild(parent, child) {
@@ -51,20 +53,23 @@ function removeChildren(parent) {
 
 function checkAnswers(answers, puzzleNumber) {
     const puzzleData = getPuzzleData();
+    const puzzle = puzzleData.puzzles[puzzleNumber];
     var results = [];
 
     answers.forEach((answer, index) => {
-        var cipher = puzzleData.puzzles[puzzleNumber].questions[index].cipher;
+        var cipher = puzzle.questions[index].cipher;
         results.push(decrypt(cipher, answer));
     });
 
+    var message;
     if (results.length > 0 & results.every(v => v === true)) {
-        showResponse("Your answer is correct!");
-        const puzzleName = puzzleData.puzzles[puzzleNumber].name;
+        message = puzzle.success ? puzzle.success : "Your answer is correct!";
+        const puzzleName = puzzle.name;
         setCookie(puzzleName, answers);
     } else {
-        showResponse("Your answer is not correct");
+        message = puzzle.fail ? puzzle.fail : "Your answer is not correct";
     }
+    showResponse(message);
 }
 
 function submitAnswers(puzzleNumber, numQuestions) {
@@ -142,6 +147,8 @@ function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
         const questions = puzzleData.puzzles[puzzleNumber].questions;
 
         removeChildren(form);
+        const br1 = document.createElement("br");
+        form.appendChild(br1);
         const numQuestions = questions.length;
 
         for (var questionNumber = 0; questionNumber < numQuestions; questionNumber++) {
@@ -173,6 +180,8 @@ function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
                 input.type = "text";
                 form.appendChild(input);
             }
+            const br = document.createElement("br");
+            form.appendChild(br);
         }
 
         var button = document.createElement("button");
@@ -221,6 +230,11 @@ function showPuzzleAnswerInput(puzzleData, puzzleNumber, showAnswerInput) {
 
 function showPuzzle(puzzleNumber) {
     const puzzleData = getPuzzleData();
+    const puzzle = puzzleData.puzzles[puzzleNumber];
+
+    description = document.getElementById("puzzleDescription");
+    description.innerHTML = puzzle.description;
+
     image = document.getElementById("puzzleImage");
     var img = document.createElement("img");
     img.src = puzzleData.puzzles[puzzleNumber].images[0];
@@ -229,15 +243,23 @@ function showPuzzle(puzzleNumber) {
 
     const dependencies = puzzleData.puzzles[puzzleNumber].dependencies;
     var showAnswerInput;
-    if (dependencies == null) {
+
+    if (puzzle.questions == null) {
+        showAnswerInput = false;
+        img.setAttribute("style", "");
+        image.setAttribute("style", "");
+    } else if (dependencies == null) {
         // Regular puzzle
         showAnswerInput = true;
         image.setAttribute("style", "display: inline-block;");
+
     } else {
         // Meta puzzle (with dependencies)
         const metaProgress = getMetaProgress(puzzleNumber);
+
         if (metaProgress == 1.0) {
             showAnswerInput = true;
+
         } else {
             showAnswerInput = false;
             const polygon = getPolygon(metaProgress);

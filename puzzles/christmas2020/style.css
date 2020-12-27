@@ -1,22 +1,42 @@
 img {
-    margin: 0px;
-  }
+  margin: 0px;
+}
 
-  .clip-polygon-1 {
-    display: inline-block;
-    clip-path: polygon(0% 0%, 50% 0%, 50% 50%, 0% 50%);
-  }
+body, html {
+  height: 100%;
+}
 
-  .clip-polygon-2 {
-    display: inline-block;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%);
-  }
+#puzzleWrapper {
+  width: 100%;
+  overflow: hidden; /* will contain if #first is longer than #second */
+  padding: 20px 20px;
+}
 
-  .clip-polygon-3 {
-    display: inline-block;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 100%, 50% 50%, 0% 50%);
-  }
-  
-  body, html {
-    height: 100%;
-  }
+#puzzleControls {
+  width: 100%;
+}
+
+#puzzleLeft {
+  width: 25%;
+  float: left; /* add this */
+}
+
+#puzzleText {
+    /* width: 25%; */
+    /* float: left; add this */
+    border: 1px solid red;
+    border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+    border-image-slice: 1;
+    margin: 20px;
+    padding: 20px;
+}
+
+#puzzleResponse {
+    padding: 0px 20px;
+}
+
+#puzzleImage {
+    overflow: hidden; /* if you don't want #second to wrap below #first */
+    margin: 20px;
+    height: 700px;
+}

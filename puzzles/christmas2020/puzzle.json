@@ -1,20 +1,22 @@
 {
-    "intro": {
-        "description": "Santa was delivering presents on Christmas Eve but almost flew into a small plane and had to made a crash landing! It looks like he landed on the roof of some kind of laboratory building. Can you help him figure out how to get off of the roof and back to his sled?",
-        "images": [
-            "intro.png"
-        ]
-    },
     "puzzles": [
+        {
+            "name": "Start",
+            "description": "Santa was merrily delivering presents on Christmas Eve when he almost flew into a small plane! To avert disaster, Santa had to made a crash landing. It looks like he landed on the roof of some kind of laboratory building, but he's stuck and can't find the exit... Can you help Santa figure out how to get off of the roof and back to his sled?",
+            "images": [
+                "intro.png"
+            ]
+        },
         {
             "name": "The roof",
             "description": "The air ducts on the roof seem to lead to different rooms: the office, the coffee table, the meeting room and the main lab. Perhaps visiting these rooms will help uncover clues on how to find the exit?",
             "questions": [
                 {
-                    "text": "What message did Santa find on the roof? ", 
-                    "cipher": "U2FsdGVkX1+m2wov02iZBVuH7LWIhwM8yQj54rB7Dlg="
+                    "text": "What message did Santa find on the roof on his way to the exit?<br>Answer: ", 
+                    "cipher": "U2FsdGVkX18hr2if6DZwo2ULr1ILeKu/xx2BIVH3YVA="
                 }
             ],
+            "success": "Your answer is correct! Thank you for helping Santa find his way back to his <a href='https://www.youtube.com/watch?v=rCcYndfwFq4' target='_blank'>sled</a>.",
             "images": [
                 "puzzle0.png",
                 "puzzle0_cover.jpg"
@@ -28,7 +30,7 @@
         },
         {
             "name": "Office",
-            "description": "In the office, this note is prominently displayed on one of the desks. You wonder what this project might be about.",
+            "description": "In the office, this note is prominently displayed on one of the desks. You wonder what this 'project' might be about.",
             "questions": [
                 {
                     "text": "Answer: ", 
@@ -41,7 +43,7 @@
         },
         {
             "name": "Coffee table",
-            "description": "There is a peculiar looking photo album lying open on the coffee table, on a page with some photos attached to it.",
+            "description": "There is a peculiar looking photo album lying open on the coffee table. Some of the photos have unfinished descriptions on them. Can you figure out what letters are missing?",
             "questions": [
                 {
                     "text": "Answer: ", 
@@ -54,7 +56,7 @@
         },
         {
             "name": "Meeting room",
-            "description": "In the meeting room, you find a message with a postcard pinned to the notice board.",
+            "description": "In the meeting room, you find a message with a postcard pinned to the notice board. What were these scientists up to?",
             "questions": [
                 {
                     "text": "Answer: ", 

@@ -5,17 +5,28 @@
 <script src="../puzzlin.js"></script>
 <script src="puzzle.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="normalize.css">
+<link rel="stylesheet" type="text/css" href="skeleton.css">
 </head>
 
 <body onload=loadPuzzle()>
 
-<div id="puzzleControls"></div>
-<div id="puzzleImage"></div>
-<form id="puzzleForm"></form>
-<div id="buttons"></div>
-<div id="submitButton" style="float: left;"></div>
-<div id="clearButton"></div>
-<div id="puzzleResponse"></div>
+<div id="puzzleWrapper">
+    <div id="puzzleControls"></div>
+    <div id="puzzleLeft">
+        <div id="puzzleText">
+            <div id="puzzleDescription"></div>
+            <form id="puzzleForm"></form>
+            <div id="buttons">
+                <div id="submitButton"></div>
+                <div id="clearButton"></div>
+            </div>
+        </div>
+        <div id="puzzleResponse"></div>
+    </div>
+    <div id="puzzleImage"></div>
+</div>
+
 
 </body>
 </html>
