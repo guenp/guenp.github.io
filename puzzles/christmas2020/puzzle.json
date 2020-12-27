@@ -10,7 +10,7 @@
         },
         {
             "name": "The roof",
-            "description": "The air ducts on the roof seem to lead to different rooms: the office, the coffee table, the meeting room and the main lab. Perhaps visiting these rooms will help uncover clues on how to find the exit?",
+            "description": "The air ducts on the roof seem to lead to different rooms: <a href='#' onclick='showPuzzle(2)'>the office</a>, <a href='#' onclick='showPuzzle(3)'>the coffee table</a>, <a href='#' onclick='showPuzzle(4)'>the meeting room</a> and <a href='#' onclick='showPuzzle(5)'>the main lab</a>. Perhaps visiting these rooms will help uncover clues on how to find the exit?",
             "questions": [
                 {
                     "text": "What message did Santa find on the roof on his way to the exit?<br>Answer: ", 
