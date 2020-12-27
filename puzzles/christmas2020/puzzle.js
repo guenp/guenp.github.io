@@ -82,31 +82,44 @@ function decrypt(ciphertext, answer) {
     return result == "correct";
 }
 
-function checkAnswer(answer, puzzleNumber) {
+function checkAnswers(answers, puzzleNumber) {
     const puzzleData = getPuzzleData();
-    const cipher = puzzleData.puzzles[puzzleNumber].cipher;
+    var results = [];
 
-    if (decrypt(cipher, answer)) {
+    answers.forEach((answer, index) => {
+        var cipher = puzzleData.puzzles[puzzleNumber].questions[index].cipher;
+        results.push(decrypt(cipher, answer));
+    });
+
+    if (results.length > 0 & results.every(v => v === true)) {
         showResponse("Your answer is correct!");
         const puzzleName = puzzleData.puzzles[puzzleNumber].name;
-        setCookie(puzzleName, answer);
+        setCookie(puzzleName, answers);
     } else {
         showResponse("Your answer is not correct");
     }
 }
 
-function submitAnswer(puzzleNumber) {
-    var answerInput = document.getElementById('answer' + puzzleNumber);
-    var answer = answerInput.value;
-    checkAnswer(answer, puzzleNumber);
+function submitAnswers(puzzleNumber, numQuestions) {
+    var answers = [];
+    for (var questionNumber = 0; questionNumber < numQuestions; questionNumber++) {
+        var answerInput = document.getElementById(`answer${puzzleNumber}_question${questionNumber}`);
+        var answer = answerInput.value;
+        answers.push(answer);
+    }
+    checkAnswers(answers, puzzleNumber);
 }
 
-function clearAnswer(puzzleNumber) {
-    var answerInput = document.getElementById('answer' + puzzleNumber);
+function clearAnswers(puzzleNumber) {
     const puzzleData = getPuzzleData();
     const puzzleName = puzzleData.puzzles[puzzleNumber].name;
     deleteCookie(puzzleName);
-    answerInput.value = "";
+    const questions = puzzleData.puzzles[puzzleNumber].questions;
+
+    for (var questionNumber = 0; questionNumber < questions.length; questionNumber++) {
+        var answerInput = document.getElementById(`answer${puzzleNumber}_question${questionNumber}`);
+        answerInput.value = "";
+    }
     showResponse("");
 }
 
@@ -125,6 +138,15 @@ function getPolygon(num, total) {
     }
 }
 
+function getAnswerFromCookie(puzzleName, questionNumber) {
+    var answers = getCookie(puzzleName).split(",");
+    if (questionNumber == 0 | answers.length > questionNumber) {
+        return answers[questionNumber];
+    } else {
+        return "";
+    }
+}
+
 function showPuzzle(puzzleNumber) {    
     image = document.getElementById("puzzleImage");
     var img = document.createElement("img");
@@ -134,10 +156,11 @@ function showPuzzle(puzzleNumber) {
 
     const puzzleData = getPuzzleData();
     const puzzleName = puzzleData.puzzles[puzzleNumber].name;
-    var dependencies = puzzleData.puzzles[puzzleNumber].dependencies;
-    var showButton = false;
+    const dependencies = puzzleData.puzzles[puzzleNumber].dependencies;
+    var showAnswerInput = false;
+
     if (dependencies == null) {
-        showButton = true;
+        showAnswerInput = true;
     }
 
     if (dependencies != null) {
@@ -150,7 +173,7 @@ function showPuzzle(puzzleNumber) {
         }
 
         if (dependencies.length == numDeps) {
-            showButton = true;
+            showAnswerInput = true;
         } else {
             const polygon = getPolygon(numDeps, dependencies.length);
             img.setAttribute("style", `display: inline-block; clip-path: polygon(${polygon});`);
@@ -164,32 +187,44 @@ function showPuzzle(puzzleNumber) {
     const submitButtonDiv = document.getElementById("submitButton");
     const clearButtonDiv = document.getElementById("clearButton");
 
-    if (showButton) {
-        var input = document.createElement("input");
-        input.type = "text";
-        input.name = `answer${puzzleNumber}`;
-        input.id = `answer${puzzleNumber}`;
-        input.value = getCookie(puzzleName);
-        replaceChild(form, input);
+    if (showAnswerInput) {
+        const questions = puzzleData.puzzles[puzzleNumber].questions;
+
+        removeChildren(form);
+        const numQuestions = questions.length;
+
+        for (var questionNumber = 0; questionNumber < numQuestions; questionNumber++) {
+            var question = questions[questionNumber];
+            var input_text = document.createElement("text");
+            input_text.innerHTML = question.text;
+            form.appendChild(input_text);
+
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = `answer${puzzleNumber}_question${questionNumber}`;
+            input.id = `answer${puzzleNumber}_question${questionNumber}`;
+            input.value = getAnswerFromCookie(puzzleName, questionNumber);
+            form.appendChild(input);
+        }
 
         var button = document.createElement("button");
         button.id = `button${puzzleNumber}`;
         button.innerHTML = "submit answer";
-        button.setAttribute("onclick", `submitAnswer(${puzzleNumber})`);
+        button.setAttribute("onclick", `submitAnswers(${puzzleNumber}, ${questions.length})`);
         replaceChild(submitButtonDiv, button);
 
         var button = document.createElement("button");
         button.id = `button${puzzleNumber}`;
         button.innerHTML = "clear answer";
-        button.setAttribute("onclick", `clearAnswer(${puzzleNumber})`);
+        button.setAttribute("onclick", `clearAnswers(${puzzleNumber})`);
         replaceChild(clearButtonDiv, button);
 
         // enter submits the answer
         var t = document.querySelector('[type=text]');
         t.addEventListener('keydown', function(event) {
             if (event.keyCode == 13) {
-                submitAnswer(puzzleNumber);
-            }
+                submitAnswers(puzzleNumber, questions.length);
+            }   
         });
 
         t.addEventListener('keypress', function(event) {
@@ -198,10 +233,10 @@ function showPuzzle(puzzleNumber) {
             }
         });
 
-        if (input.value) {
-            checkAnswer(input.value, puzzleNumber);
-        } else {
+        if (!input.value) {
             showResponse("");
+        } else {
+            submitAnswers(puzzleNumber, questions.length);
         }
 
     } else {

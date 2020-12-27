@@ -1,8 +1,17 @@
 {
+    "intro": {
+        "description": "Santa was delivering presents on Christmas Eve but almost flew into a small plane and had to made a crash landing! It looks like he landed on the roof of some kind of laboratory building. Can you help him figure out how to get off of the roof and back to his sled?"
+    },
     "puzzles": [
         {
-            "name": "Back to the roof",
-            "ciphers": ["U2FsdGVkX1+m2wov02iZBVuH7LWIhwM8yQj54rB7Dlg="],
+            "name": "The roof",
+            "description": "The air ducts on the roof seem to lead to different rooms: the office, the coffee table, the meeting room and the main lab. Perhaps visiting this rooms will help uncover clues on how to find the exit.",
+            "questions": [
+                {
+                    "text": "What message did Santa find on the roof? ", 
+                    "cipher": "U2FsdGVkX1+m2wov02iZBVuH7LWIhwM8yQj54rB7Dlg="
+                }
+            ],
             "images": [
                 "puzzle0.png"
             ],
@@ -15,32 +24,63 @@
         },
         {
             "name": "Office",
-            "ciphers": ["U2FsdGVkX1/xhJjPHNWL/qa9QdJ5VEb4kvopYmZFqYg="],
+            "description": "In the office, this note is prominently displayed on one of the desks. You wonder what this project might be about.",
+            "questions": [
+                {
+                    "text": "Answer: ", 
+                    "cipher": "U2FsdGVkX1/xhJjPHNWL/qa9QdJ5VEb4kvopYmZFqYg="
+                }
+            ],
             "images": [
                 "puzzle1.png"
             ]
         },
         {
             "name": "Coffee table",
-            "ciphers": ["U2FsdGVkX1/j9swn/Sl6hRcRxKV2gkFr6Q+2ZNdiT+4="],
+            "description": "There is a peculiar looking photo album lying open on the coffee table, on a page with some photos attached to it.",
+            "questions": [
+                {
+                    "text": "Answer: ", 
+                    "cipher": "U2FsdGVkX1/j9swn/Sl6hRcRxKV2gkFr6Q+2ZNdiT+4="
+                }
+            ],
             "images": [
                 "puzzle2.png"
             ]
         },
         {
             "name": "Meeting room",
-            "ciphers": ["U2FsdGVkX19dt9yG//pmvhdIdJRNdHEu/fVyqtqjAqk="],
+            "description": "In the meeting room, you find a message with a postcard pinned to the notice board.",
+            "questions": [
+                {
+                    "text": "Answer: ", 
+                    "cipher": "U2FsdGVkX19dt9yG//pmvhdIdJRNdHEu/fVyqtqjAqk="
+                }
+            ],
             "images": [
                 "puzzle3.png"
             ]
         },
         {
             "name": "Main lab",
-            "ciphers": [
-                "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768=",
-                "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768=",
-                "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768=",
-                "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+            "description": "You enter the main lab and next to some buzzing equipment, there is a file open on one of the computers. Is that a puzzle?",
+            "questions": [
+                {
+                    "text": "A will receive: ", 
+                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                },
+                {
+                    "text": "B will receive: ", 
+                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                },
+                {
+                    "text": "C will receive: ", 
+                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                },
+                {
+                    "text": "D will receive: ", 
+                    "cipher": "U2FsdGVkX19jzCQs4Quuo5mdztby7awpBIuPV2kZ768="
+                }
             ],
             "images": [
                 "puzzle4.png"
