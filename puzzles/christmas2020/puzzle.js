@@ -235,6 +235,11 @@ function showPuzzle(puzzleNumber) {
     description = document.getElementById("puzzleDescription");
     description.innerHTML = puzzle.description;
 
+    if (puzzleData.credits != null) {
+        credits = document.getElementById("puzzleCredits");
+        credits.innerHTML = puzzleData.credits;
+    }
+
     image = document.getElementById("puzzleImage");
     var img = document.createElement("img");
     img.src = puzzleData.puzzles[puzzleNumber].images[0];
@@ -265,7 +270,7 @@ function showPuzzle(puzzleNumber) {
             const polygon = getPolygon(metaProgress);
             img.setAttribute("style", `display: inline-block; clip-path: polygon(${polygon});`);
             const meta = puzzleData.puzzles[puzzleNumber].images[1];
-            image.setAttribute("style", `display: inline-block; background-image: url(${meta});`);
+            image.setAttribute("style", `display: inline-block; background-image: url(${meta}); background-repeat: no-repeat;`);
         }
     }
 

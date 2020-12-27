@@ -1,5 +1,6 @@
 img {
   margin: 0px;
+  height: 100%;
 }
 
 body, html {
@@ -7,7 +8,7 @@ body, html {
 }
 
 #puzzleWrapper {
-  width: 100%;
+  width: 90%;
   overflow: hidden; /* will contain if #first is longer than #second */
   padding: 20px 20px;
 }
@@ -35,8 +36,13 @@ body, html {
     padding: 0px 20px;
 }
 
+#puzzleCredits {
+  font-size: 10px;
+  padding-top: 10px;
+}
+
 #puzzleImage {
     overflow: hidden; /* if you don't want #second to wrap below #first */
     margin: 20px;
-    height: 700px;
+    height: 80%;
 }
