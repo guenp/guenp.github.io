@@ -38,6 +38,7 @@
                     "cipher": "U2FsdGVkX1/xhJjPHNWL/qa9QdJ5VEb4kvopYmZFqYg="
                 }
             ],
+            "success": "Your answer is correct! Go <a href='#' onclick='showPuzzle(1)'>back to the roof</a> to see if you can find more clues for Santa...",
             "images": [
                 "puzzle1.png"
             ]
@@ -51,6 +52,7 @@
                     "cipher": "U2FsdGVkX1/j9swn/Sl6hRcRxKV2gkFr6Q+2ZNdiT+4="
                 }
             ],
+            "success": "Your answer is correct! Go <a href='#' onclick='showPuzzle(1)'>back to the roof</a> to see if you can find more clues for Santa...",
             "images": [
                 "puzzle2.png"
             ]
@@ -64,6 +66,7 @@
                     "cipher": "U2FsdGVkX19dt9yG//pmvhdIdJRNdHEu/fVyqtqjAqk="
                 }
             ],
+            "success": "Your answer is correct! Go <a href='#' onclick='showPuzzle(1)'>back to the roof</a> to see if you can find more clues for Santa...",
             "images": [
                 "puzzle3.png"
             ]
@@ -109,6 +112,7 @@
                     ]
                 }
             ],
+            "success": "Your answer is correct! Go <a href='#' onclick='showPuzzle(1)'>back to the roof</a> to see if you can find more clues for Santa...",
             "images": [
                 "puzzle4.png"
             ]
