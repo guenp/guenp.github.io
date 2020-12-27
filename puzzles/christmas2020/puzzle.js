@@ -251,7 +251,8 @@ function showPuzzle(puzzleNumber) {
     image = document.getElementById("puzzleImage");
     var img = document.createElement("img");
     img.src = puzzleData.puzzles[puzzleNumber].images[0];
-    img.height = 700;
+    // img.height = 700;
+    img.setAttribute("id", "puzzleImg");
     replaceChild(image, img);
 
     const dependencies = puzzleData.puzzles[puzzleNumber].dependencies;

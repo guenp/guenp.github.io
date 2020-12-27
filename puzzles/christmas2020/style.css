@@ -4,10 +4,6 @@ github.com/guenp/guenp.github.io
 (c) 2020 by Guen Prawiroatmodjo. All rights reserved.
 https://raw.githubusercontent.com/guenp/guenp.github.io/main/LICENSE
 */
-img {
-  margin: 0px;
-  height: 100%;
-}
 
 body, html {
   height: 100%;
@@ -55,15 +51,17 @@ body, html {
 }
 
 #puzzleImage {
-    overflow: scroll; /* if you don't want #second to wrap below #first */
+    overflow: scroll;
     margin: 20px;
     height: 80%;
-    min-height: 500px;
-    min-width: 480px;
+    min-height: 60%;
+    min-width: 60%;
 }
 
 #puzzleImg {
+  height: 100%;
+  margin: 0px;
   display: inline-block;
-  min-height: 500px;
-  min-width: 480px;
+  /* min-height: 100%;
+  min-width: 100%; */
 }
